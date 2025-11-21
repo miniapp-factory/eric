@@ -56,7 +56,7 @@ export function Game2048() {
     let gained = 0;
 
     const iterate = (indices: number[]) => {
-      const line = indices.map(i => newGrid[i]);
+      const line = indices.map(i => newGrid[Math.floor(i / GRID_SIZE)][i % GRID_SIZE]);
       const filtered = line.filter(v => v !== 0);
       const merged: number[] = [];
       let skip = false;
