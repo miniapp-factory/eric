@@ -35,7 +35,7 @@ export function Game2048() {
     addRandomTile(initGrid);
     addRandomTile(initGrid);
     setGrid(initGrid);
-  }, []);
+  }, [addRandomTile]);
 
   const addRandomTile = useCallback((g: number[][]) => {
     const empty: [number, number][] = [];
@@ -72,8 +72,10 @@ export function Game2048() {
       }
       while (merged.length < GRID_SIZE) merged.push(0);
       for (let i = 0; i < GRID_SIZE; i++) {
-        if (newGrid[indices[i]] !== merged[i]) moved = true;
-        newGrid[indices[i]] = merged[i];
+        const row = Math.floor(indices[i] / GRID_SIZE);
+        const col = indices[i] % GRID_SIZE;
+        if (newGrid[row][col] !== merged[i]) moved = true;
+        newGrid[row][col] = merged[i];
       }
     };
 
